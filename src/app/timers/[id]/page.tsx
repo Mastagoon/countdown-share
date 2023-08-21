@@ -9,7 +9,7 @@ interface CountdownPageProps {
 
 const CountdownPage: React.FC<CountdownPageProps> = async ({ params: { id } }) => {
   const client = new PrismaClient()
-  const result = await client.countdown.findFirst({ where: { id: Number(id) } })
+  const result = await client.countdown.findFirst({ where: { id: id } })
 
   if (!result) return <h1>Not found.</h1>
 
