@@ -37,19 +37,24 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
     <h1 className="text-3xl">{countdown.title}</h1>
     <div className="flex  justify-center items-center">
       {seconds ?
-        <div className="flex flex-row gap-20">
-          <div className="text-8xl font-bold">
-            {days}d
+        <div className="relative">
+          <div className="flex flex-row gap-20">
+            <div className="text-8xl font-bold">
+              {days}d
+            </div>
+            <div className="text-8xl font-bold">
+              {hours}h
+            </div>
+            <div className="text-8xl font-bold">
+              {minutes}m
+            </div>
+            <div className="text-8xl font-bold">
+              {seconds}s
+            </div>
           </div>
-          <div className="text-8xl font-bold">
-            {hours}h
-          </div>
-          <div className="text-8xl font-bold">
-            {minutes}m
-          </div>
-          <div className="text-8xl font-bold">
-            {seconds}s
-          </div>
+          <div className="
+            absolute border-2 px-8 py-1 rounded-md hover:opacity-80 hover:bg-white hover:text-black transition-all cursor-pointer
+            ">Share</div>
         </div>
         :
         countdownDate - new Date().getTime() < 0 ?
