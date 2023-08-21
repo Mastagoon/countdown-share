@@ -2,8 +2,11 @@
 import { addZeroToTheLeft, dateToHoursMinutseSeconds } from "@/utils"
 import { Countdown } from "@prisma/client"
 import { useEffect, useState } from "react"
+import ShareModal from "./ShareModal"
 
 const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) => {
+  const [showShareModal, setShowShareModal] = useState(false)
+
   const [days, setDays] = useState<string>()
   const [hours, setHours] = useState<string>()
   const [minutes, setMinutes] = useState<string>()
@@ -52,9 +55,12 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
               {seconds}s
             </div>
           </div>
-          <div className="
+          <button
+            onClick={() => setShowShareModal(true)}
+            className="
             absolute border-2 px-8 py-1 rounded-md hover:opacity-80 hover:bg-white hover:text-black transition-all cursor-pointer
-            ">Share</div>
+            left-1/2 -translate-x-1/2 translate-y-1/2
+            ">Share</button>
         </div>
         :
         countdownDate - new Date().getTime() < 0 ?
@@ -63,6 +69,7 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
           null
       }
     </div>
+    <ShareModal isOpen={showShareModal} setIsOpen={setShowShareModal} url={`${window.location.protocol}//${window.location.hostname}/timers/${countdown.id}`} />
   </div>
 
 }
