@@ -9,7 +9,7 @@ const error = (s: string): FormActionResponseType<any> => {
   }
 }
 
-export const addCountdown = async (d: FormData): Promise<FormActionResponseType<number>> => {
+export const addCountdown = async (d: FormData): Promise<FormActionResponseType<string>> => {
   'use server'
   const title = d.get("title")
   const date = d.get("date")
