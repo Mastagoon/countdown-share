@@ -1,5 +1,7 @@
 import CountdownComponent from "@/components/Countdown";
+import Loading from "@/components/Loading";
 import { PrismaClient } from "@prisma/client";
+import { Suspense } from "react";
 
 interface CountdownPageProps {
   params: {
@@ -13,7 +15,9 @@ const CountdownPage: React.FC<CountdownPageProps> = async ({ params: { id } }) =
 
   if (!result) return <h1>Not found.</h1>
 
-  return <CountdownComponent countdown={result} />
+  return <Suspense fallback={<Loading />}>
+    <CountdownComponent countdown={result} />
+  </Suspense>
 }
 
 export default CountdownPage
