@@ -69,7 +69,7 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
           null
       }
     </div>
-    <ShareModal isOpen={showShareModal} setIsOpen={setShowShareModal} url={`${window ? `${window.location.protocol}//${window.location.hostname}/timers/${countdown.id}` : '#'}`} />
+    <ShareModal isOpen={showShareModal} setIsOpen={setShowShareModal} url={`${typeof window === 'undefined' ? '#' : `${window.location.protocol}//${window.location.hostname}/timers/${countdown.id}`}`} />
   </div>
 
 }
