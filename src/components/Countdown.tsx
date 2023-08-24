@@ -2,8 +2,11 @@
 import { addZeroToTheLeft, dateToHoursMinutseSeconds } from "@/utils"
 import { Countdown } from "@prisma/client"
 import { useEffect, useState } from "react"
+import ShareModal from "./ShareModal"
 
 const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) => {
+  const [showShareModal, setShowShareModal] = useState(false)
+
   const [days, setDays] = useState<string>()
   const [hours, setHours] = useState<string>()
   const [minutes, setMinutes] = useState<string>()
@@ -37,19 +40,27 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
     <h1 className="text-3xl">{countdown.title}</h1>
     <div className="flex  justify-center items-center">
       {seconds ?
-        <div className="flex flex-row gap-20">
-          <div className="text-8xl font-bold">
-            {days}d
+        <div className="relative">
+          <div className="flex flex-row gap-20">
+            <div className="text-8xl font-bold">
+              {days}d
+            </div>
+            <div className="text-8xl font-bold">
+              {hours}h
+            </div>
+            <div className="text-8xl font-bold">
+              {minutes}m
+            </div>
+            <div className="text-8xl font-bold">
+              {seconds}s
+            </div>
           </div>
-          <div className="text-8xl font-bold">
-            {hours}h
-          </div>
-          <div className="text-8xl font-bold">
-            {minutes}m
-          </div>
-          <div className="text-8xl font-bold">
-            {seconds}s
-          </div>
+          <button
+            onClick={() => setShowShareModal(true)}
+            className="
+            absolute border-2 px-8 py-1 rounded-md hover:opacity-80 hover:bg-white hover:text-black transition-all cursor-pointer
+            left-1/2 -translate-x-1/2 translate-y-1/2
+            ">Share</button>
         </div>
         :
         countdownDate - new Date().getTime() < 0 ?
@@ -58,6 +69,7 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
           null
       }
     </div>
+    <ShareModal isOpen={showShareModal} setIsOpen={setShowShareModal} url={`${window.location.protocol}//${window.location.hostname}/timers/${countdown.id}`} />
   </div>
 
 }
