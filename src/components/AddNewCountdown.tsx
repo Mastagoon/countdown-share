@@ -16,8 +16,8 @@ const AddNewCountdownForm = () => {
     </div>
 
     <div className="flex flex-col">
-      <label htmlFor="url">Redirect Url</label>
-      <input type="text" name="url" className="py-1 rounded-md border-2 border-slate-500 outline-none text-black px-2" />
+      <label htmlFor="redirectionUrl">Redirect Url</label>
+      <input type="text" name="redirectionUrl" className="py-1 rounded-md border-2 border-slate-500 outline-none text-black px-2" />
     </div>
 
     <div className="flex flex-col">
