@@ -37,7 +37,7 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
       setMinutes(addZeroToTheLeft(minutes))
       setSeconds(addZeroToTheLeft(seconds))
     } else {
-      redirect(countdown.url)
+      redirect(countdown.redirection_url)
     }
   }
 
@@ -47,12 +47,12 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
       let interval = setInterval(getTick, 1000)
       return () => clearInterval(interval)
     } else {
-      redirect(countdown.url)
+      redirect(countdown.redirection_url)
     }
   }, [])
 
   return <div className="flex flex-col justify-center items-center h-screen w-screen">
-    {isRedirecting && <Loading t={`Redirecting to ${countdown.url}`} />}
+    {isRedirecting && <Loading t={`Redirecting to ${countdown.redirection_url}`} />}
     <h1 className="text-3xl">{countdown.title}</h1>
     <div className="flex  justify-center items-center">
       {seconds ?

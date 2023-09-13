@@ -11,8 +11,8 @@ datasource db {
 }
 
 model Countdown {
-  id    String  @id @default(uuid())
-  title String
-  date  String
-  url   String?
+  id              String  @id @default(uuid())
+  title           String
+  date            String
+  redirection_url String?
 }
