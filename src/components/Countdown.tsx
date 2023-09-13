@@ -3,6 +3,8 @@ import { addZeroToTheLeft, dateToHoursMinutseSeconds } from "@/utils"
 import { Countdown } from "@prisma/client"
 import { useEffect, useState } from "react"
 import ShareModal from "./ShareModal"
+import { useRouter } from "next/navigation"
+import Loading from "./Loading"
 
 const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) => {
   const [showShareModal, setShowShareModal] = useState(false)
@@ -12,6 +14,18 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
   const [minutes, setMinutes] = useState<string>()
   const [seconds, setSeconds] = useState<string>()
   const [countdownDate, _] = useState(new Date(countdown.date).getTime())
+  const [isRedirecting, setIsRedirecting] = useState<boolean>(false)
+  const router = useRouter()
+
+  const redirect = (url: string | null) => {
+    if (url) {
+      setIsRedirecting(true)
+      setTimeout(() => {
+        console.log("Redirecting....")
+        router.push(url)
+      }, 500)
+    }
+  }
 
   const getTick = () => {
     const now = new Date().getTime()
@@ -22,6 +36,8 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
       setHours(addZeroToTheLeft(hours))
       setMinutes(addZeroToTheLeft(minutes))
       setSeconds(addZeroToTheLeft(seconds))
+    } else {
+      redirect(countdown.url)
     }
   }
 
@@ -31,12 +47,12 @@ const CountdownComponent: React.FC<{ countdown: Countdown }> = ({ countdown }) =
       let interval = setInterval(getTick, 1000)
       return () => clearInterval(interval)
     } else {
-
+      redirect(countdown.url)
     }
   }, [])
 
-
   return <div className="flex flex-col justify-center items-center h-screen w-screen">
+    {isRedirecting && <Loading t={`Redirecting to ${countdown.url}`} />}
     <h1 className="text-3xl">{countdown.title}</h1>
     <div className="flex  justify-center items-center">
       {seconds ?

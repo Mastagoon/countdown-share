@@ -16,6 +16,11 @@ const AddNewCountdownForm = () => {
     </div>
 
     <div className="flex flex-col">
+      <label htmlFor="url">Redirect Url</label>
+      <input type="text" name="url" className="py-1 rounded-md border-2 border-slate-500 outline-none text-black px-2" />
+    </div>
+
+    <div className="flex flex-col">
       <label htmlFor="date">Date</label>
       <input min={new Date().toISOString().split("T")[0] + "T00:00:00.000"} type="datetime-local" name="date" className="py-1 rounded-md border-2 border-slate-500 outline-none text-black px-2" />
     </div>

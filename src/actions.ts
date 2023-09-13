@@ -13,9 +13,11 @@ export const addCountdown = async (d: FormData): Promise<FormActionResponseType<
   'use server'
   const title = d.get("title")
   const date = d.get("date")
-  if (!title || !date) return error("Invalid input.")
+  const url = d.get("url")
+  if (!title || !date || !url) return error("Invalid input.")
   const data = {
     title: title.toString(),
+    url: url.toString(),
     date: date.toString()
   }
   try {
